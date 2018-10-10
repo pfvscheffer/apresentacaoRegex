@@ -7,6 +7,11 @@
         body {
             background-color: black;
             font-family: 'Consolas', monospace;
+            font-size: 4vh;
+        }
+
+        h1 {
+            font-size: 22vh;
         }
 
         .hidden {
@@ -70,6 +75,9 @@
         .italico {
             font-style: italic;
         }
+        li {
+            line-height: 6vh;
+        }
     </style>
 </head>
 
@@ -86,8 +94,16 @@
         <div class='container hidden' data-titulo=''>
             <h1>Expressões Regulares</h1>
         </div>
-        <div class='container hidden' data-titulo='Powered by'>
-            <img>
+        <div class='container hidden' data-titulo='Apresentação'>
+            <ul>
+                <li>Pedro Scheffer</li>
+                <li>Engenheiro Civil</li>
+                <li>Aprendi a programar com Pascal e comecei a sério com VBA</li>
+                <li>2 anos programando em Fortran antes do banco</li>
+                <li>5 anos e 10 dias de Banrisul</li>
+                <li>Conheci expressões regulares no Mehlroes Práticas</li>
+                <li>Não sei usar PowerPoint (nem Impress)</li>
+            </ul>
         </div>
         <div class='container hidden' data-titulo='O que são Expressões Regulares?'>
             <p>Expressões regulares são sequências de caracteres que definem padrões de busca.</p>
@@ -274,16 +290,74 @@
                 </tr>
             </table>
         </div>
-        <div class='container hidden' data-titulo='Âncoras'></div>
-        <div class='container hidden' data-titulo='Grupos'></div>
-        <div class='container hidden' data-titulo='Grupos nomeados'></div>
-        <div class='container hidden' data-titulo='Grupos sem captura'></div>
-        <div class='container hidden' data-titulo='Grupos de vizinhos'></div>
+        <div class='container hidden' data-titulo='Âncoras'>
+            <p>As âncoras não fazem parte da captura, mas a validam de acordo com a posição.</p>
+            <p>As mais usadas são ^ para início de linha ou string e $ para o final.</p>
+        </div>
+        <div class='container hidden' data-titulo='Grupos'>
+            <p>Os grupos são sbuexpressões colocadas entre parênteses.</p>
+            <p>Pode-se acessar um grupo já capturado usando \n, onde
+                <span class="italico">n</span> é o número da captura em ordem.</p>
+            <table>
+                <tr>
+                    <th>Regex</th>
+                    <th>String</th>
+                    <th>Match</th>
+                </tr>
+                <tr>
+                    <td>([a-c]{2});+?\1</td>
+                    <td>cabeça de cavalo</td>
+                    <td>
+                        <span class='destaque'>cabeça de ca</span>valo</td>
+                </tr>
+            </table>
+        </div>
+        <div class='container hidden' data-titulo='Grupos nomeados'>
+            <p>É mais fácil acessar os grupos dando-lhes nomes. Além disso, a expressão regular fica um pouco menos ilegível</p>
+            <p>A sintaxe do grupo nomeado é (?&lt;NOME&gt;expressão), e dentro da regex ele é acessado com \k&lt;NOME&gt;</p>
+        </div>
+        <div class='container hidden' data-titulo='Grupos sem captura'>
+            <p>Para não capturar um grupo se usa (?!expressao).</p>
+        </div>
+        <div class='container hidden' data-titulo='Grupos de vizinhos'>
+            <p>Esses grupos observam à frente ou a trás da expressão. Funcionam como âncoras definidas por expressões.
+            </p>
+            <table>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
         <div class='container hidden' data-titulo='Grupos de balanço (.NET)'></div>
         <div class='container hidden' data-titulo="Uso em JavaScript"></div>
         <div class="container hidden" data-titulo="Uso em C#"></div>
         <div class="container hidden" data-titulo="Uso em Java"></div>
-        <div class="container hidden" data-titulo="Recomendações"></div>
+        <div class="container hidden" data-titulo="Recomendações">
+            <ul>
+                <li>Referência .NET:
+                    <a href="https://docs.microsoft.com/en-us/dotnet/standard/base-types/regular-expression-language-quick-reference">https://docs.microsoft.com/en-us/dotnet/standard/base-types/regular-expression-language-quick-reference</a>
+                </li>
+                <li>Intrepretador Regex 101:
+                    <a href='https://regex101.com/'>https://regex101.com/</a>
+                </li>
+                <li>
+                    Regex Editor no Developer Tools
+                </li>
+            </ul>
+        </div>
     </div>
     <script>
         document.getElementsByTagName('body')[0].addEventListener('keydown', tratarTecla);
