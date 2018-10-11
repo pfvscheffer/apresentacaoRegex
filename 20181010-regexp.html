@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <style>
         body {
-            background-color: black;
             font-family: 'Consolas', monospace;
             font-size: 4vh;
         }
@@ -64,8 +63,7 @@
         }
 
         .destaque {
-            text-decoration: underline;
-            text-decoration-color: red;
+	background-color: salmon;
         }
 
         td {
@@ -99,7 +97,7 @@
             <ul>
                 <li>Pedro Scheffer</li>
                 <li>Engenheiro Civil</li>
-                <li>Aprendi a programar com Pascal e comecei a sério com VBA</li>
+                <li>Aprendi o básico com Pascal e comecei a sério com VBA</li>
                 <li>2 anos programando em Fortran antes do banco</li>
                 <li>5 anos e 10 dias de Banrisul</li>
                 <li>Conheci expressões regulares no Mehlroes Práticas</li>
@@ -191,7 +189,7 @@
             <p>Para buscar a menor combinação possível, pode-se colocar
                 <span class='destaque'>?</span> após o quantificador.</p>
         </div>
-        <div class='container hidden' data-titulo='Grupos de caracteres'>
+        <div class='container hidden' data-titulo='Lista de caracteres'>
             <p>Para tentar combinar com um caracter de uma lista de caracteres, usamos colchetes.</p>
             <p>Um hífen pode ser usado para representar um intervalo de caracteres.</p>
             <p>Para combinar com os caracteres NÃO presentes no grupo, se inicia com um acento circunflexo.</p>
@@ -321,6 +319,9 @@
             <p>Para não capturar um grupo se usa (?:expressao).</p>
             <p>Um dos usos desse grupo é quando se quer delimitar uma expressão sem incluir na lista de grupos dos resultados.</p>
             <p>Ex: (?&lt;BOLO&gt;bol(?:inh|ã)?o)</p>
+	    <p>
+	      um <span class='destaque'>bolo</span>, um <span class='destaque'>bolinho</span>, um <span class='destaque'>bolão</span>
+	    </p>
         </div>
         <div class='container hidden' data-titulo='Grupos de vizinhos'>
             <p>Esses grupos observam à frente ou a trás da expressão. Funcionam como âncoras definidas por expressões.
@@ -368,7 +369,19 @@
                 </tr>
             </table>
         </div>
-        <div class='container hidden' data-titulo='Grupos de balanço (.NET)'></div>
+        <div class='container hidden' data-titulo='Grupos balanceados (.NET)'>
+	  <p>Os grupos balanceados permitem fazer capturas de conteúdos em caracteres aninhados. Se muda o conteúdo de grupo capturado com (?&lt;NOVO-VELHO&gt;<span class='italico'>expressão</span>)</p>
+	  <p>Exemplo no Regex Editor</p>
+	  <pre>(?x: ((?&lt;P&gt;[(]) # Abre grupo
+	    | (?&lt;C&gt;-&lt;P&gt;[)]) # Fecha grupo P e captura conteudo em C
+	    | (?(P) # Se existe grupo P
+	    [^()] # Captura o que não é parênteses
+	    | (?!) # Se não existe P não captura nada
+	    )
+	    )+
+	    (?(P)(?!)) # Se não fechou algum grupo, não captura nada
+	  </code>
+	</div>
         <div class='container hidden' data-titulo='Opções'>
             <p>Existem algumas opções que modificam o comportamento das expressões</p>
             <p>Elas podem ser definidas em uma subexpressão (?opções:expressão) ou para toda a expressão</p>
@@ -400,8 +413,9 @@
             <p>Em JavaScript existe o literal pra expressões regulares:</p>
             <p>/expressão/opcções</p>
         </div>
-        <div class="container hidden" data-titulo="Uso em C#"></div>
-        <div class="container hidden" data-titulo="Uso em Java"></div>
+        <div class="container hidden" data-titulo="Uso em C#">
+	  <p>Em C# pode-se criar um objeto Pattern inicializendo com a expressão em uma string ou se usa a expressão diretamente em alguns métodos estáticos.</p>
+	</div>
         <div class="container hidden" data-titulo="Recomendações">
             <ul>
                 <li>Referência .NET:
@@ -413,6 +427,7 @@
                 <li>
                     Regex Editor no Developer Tools
                 </li>
+		<li> Palavras cruzadas <a href="https://regexcrossword.com/">https://regexcrossword.com/</a></li>
             </ul>
         </div>
     </div>
