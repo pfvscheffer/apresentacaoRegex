@@ -1,477 +1,524 @@
 <!DOCTYPE html>
 <html>
 
-<head>
+  <head>
     <meta charset="utf-8">
     <style>
-        body {
-            font-family: 'Consolas', monospace;
-            font-size: 4vh;
-        }
+      body {
+      font-family: 'Consolas', monospace;
+      font-size: 4vh;
+      }
 
-        h1 {
-            font-size: 22vh;
-        }
+      h1 {
+      font-size: 22vh;
+      }
 
-        .hidden {
-            display: none;
-        }
+      .hidden {
+      display: none;
+      }
 
-        .header {
-            position: absolute;
-            width: 100vw;
-            height: 10vh;
-            top: 0;
-            left: 0;
-            background-color: darkblue;
-            margin: 0;
-            color: white;
-            font-size: 6vh;
-            vertical-align: middle;
-        }
+      .header {
+      position: absolute;
+      width: 100vw;
+      height: 10vh;
+      top: 0;
+      left: 0;
+      background-color: darkblue;
+      margin: 0;
+      color: white;
+      font-size: 6vh;
+      vertical-align: middle;
+      }
 
-        .header p {
-            margin: 0 0 0 1vh;
-            line-height: 10vh;
-        }
+      .header p {
+      margin: 0 0 0 1vh;
+      line-height: 10vh;
+      }
 
-        #meter-back {
-            position: absolute;
-            top: 10vh;
-            left: 0;
-            height: 1vh;
-            width: 100vw;
-            background-color: cornflowerblue;
-            margin: 0;
-        }
+      #meter-back {
+      position: absolute;
+      top: 10vh;
+      left: 0;
+      height: 1vh;
+      width: 100vw;
+      background-color: cornflowerblue;
+      margin: 0;
+      }
 
-        #meter-front {
-            width: 0%;
-            height: 100%;
-            background-color: aqua;
-            margin: 0;
-        }
+      #meter-front {
+      width: 0%;
+      height: 100%;
+      background-color: aqua;
+      margin: 0;
+      }
 
-        .container {
-            position: absolute;
-            width: 100vw;
-            height: 89vh;
-            top: 11vh;
-            left: 0;
-            background-color: white;
-            margin: 0;
-        }
+      .container {
+      position: absolute;
+      width: 100vw;
+      height: 89vh;
+      top: 11vh;
+      left: 0;
+      background-color: white;
+      margin: 0;
+      }
 
-        .destaque {
-	background-color: salmon;
-        }
+      .destaque {
+      background-color: salmon;
+      }
 
-        td {
-            padding: 1vh;
-        }
+      td {
+      padding: 1vh;
+      }
 
-        .italico {
-            font-style: italic;
-        }
+      .italico {
+      font-style: italic;
+      }
 
-        li {
-            line-height: 6vh;
-        }
+      li {
+      line-height: 6vh;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class='header'>
-        <p>
-            <span id='titulo'></span>
-        </p>
+      <p>
+        <span id='titulo'></span>
+      </p>
     </div>
     <div id="meter-back">
-        <div id="meter-front"></div>
+      <div id="meter-front"></div>
     </div>
     <div class='body'>
-        <div class='container hidden' data-titulo=''>
-            <h1>Expressões Regulares</h1>
-        </div>
-        <div class='container hidden' data-titulo='Apresentação'>
-            <ul>
-                <li>Pedro Scheffer</li>
-                <li>Engenheiro Civil</li>
-                <li>Aprendi o básico com Pascal e comecei a sério com VBA</li>
-                <li>2 anos programando em Fortran antes do banco</li>
-                <li>5 anos e 10 dias de Banrisul</li>
-                <li>Conheci expressões regulares no Mehlroes Práticas</li>
-                <li>Não sei usar PowerPoint (nem Impress)</li>
-            </ul>
-        </div>
-        <div class='container hidden' data-titulo='O que são Expressões Regulares?'>
-            <p>Expressões regulares são sequências de caracteres que definem padrões de busca.</p>
-        </div>
-        <div class='container hidden' data-titulo='⚠ Importante! ⚠'>
-            <q>Some people, when confronted with a problem, think “I know, I'll use regular expressions.” Now they have two
-                problems.
-            </q>
-            <div class='direita'>
-                <span class='autor'></span>Jamie Zawinski</span>
-            </div>
-        </div>
-        <div class='container hidden' data-titulo='Caracteres normais'>
-            <p>São todos os caracteres que não são especiais :)</p>
-            <p>Exemplos: A b 3 @ !</p>
-            <p>Eles combinam com caracteres iguais. Se combinados, com a sequência.</p>
-            <table>
-                <tr>
-                    <th>Regex</th>
-                    <th>String</th>
-                    <th>Combinações</th>
-                </tr>
-                <tr>
-                    <td>aba</td>
-                    <td>abacate</td>
-                    <td>
-                        <span class='destaque'>aba</span>cate</td>
-                </tr>
-                <tr>
-                    <td>010</td>
-                    <td>01010</td>
-                    <td>
-                        <span class='destaque'>010</span>10
-                    </td>
-                </tr>
-                <tr>
-                    <td>010</td>
-                    <td>0101010</td>
-                    <td>
-                        <span class='destaque'>010</span>1
-                        <span class='destaque'>0</span>
-                    </td>
-                </tr>
-
-            </table>
-        </div>
-        <div class='container hidden' data-titulo='Quantificadores'>
-            <p>Indicam um multiplicador para o caractere ou grupo de caracteres anterior.</p>
-            <table>
-                <tr>
-                    <th>Quantificador</th>
-                    <th>Descrição</th>
-                    <th>Equivale a</th>
-                </tr>
-                <tr>
-                    <td>*</td>
-                    <td>zero ou mais repetições</td>
-                    <td>{0,}</td>
-                </tr>
-                <tr>
-                    <td>+</td>
-                    <td>uma ou mais repetições</td>
-                    <td>{1,}</td>
-                </tr>
-                <tr>
-                    <td>?</td>
-                    <td>zero ou uma repetição</td>
-                    <td>{0,1}</td>
-                </tr>
-                <tr>
-                    <td>{n}</td>
-                    <td>exatamente
-                        <span class='italico'>n</span> repetições</td>
-                </tr>
-                <tr>
-                    <td>{n, m}</td>
-                    <td>no mínimo
-                        <span class='italico'>n</span> repetições e no máximo
-                        <span class='italico'>m</span> repetições</td>
-                </tr>
-            </table>
-            <p>Os quantificadores são gulosos (
-                <span class='italico'>greedy</span> ou cobiçosos em inglês, ou seja, buscam a maior combinação possível.</p>
-            <p>Para buscar a menor combinação possível, pode-se colocar
-                <span class='destaque'>?</span> após o quantificador.</p>
-        </div>
-        <div class='container hidden' data-titulo='Lista de caracteres'>
-            <p>Para tentar combinar com um caracter de uma lista de caracteres, usamos colchetes.</p>
-            <p>Um hífen pode ser usado para representar um intervalo de caracteres.</p>
-            <p>Para combinar com os caracteres NÃO presentes no grupo, se inicia com um acento circunflexo.</p>
-            <table>
-                <tr>
-                    <th>Regex</th>
-                    <th>String</th>
-                    <th>Combinações</th>
-                </tr>
-                <tr>
-                    <td>[Ab!]</td>
-                    <td>Abacate!</td>
-                    <td>
-                        <span class='destaque'>A</span>
-                        <span class='destaque'>b</span>acate
-                        <span class='destaque'>!</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>[a-e]+</td>
-                    <td>Abacate!</td>
-                    <td>A
-                        <span class='destaque'>baca</span>t
-                        <span class='destaque'>e</span>!</td>
-                </tr>
-                <tr>
-                    <td>[^a-e]+</td>
-                    <td>Abacate!</td>
-                    <td>
-                        <span class='destaque'>A</span>baca
-                        <span class='destaque'>t</span>e
-                        <span class='destaque'>!</span>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class='container hidden' data-titulo='Classes de caracteres'>
-            <p>As classes de caracteres incluem alguns atalhos para os grupos já mencionados.</p>
-            <p>A negação das classes é usando a letra maiúscula.</p>
-            <table>
-                <tr>
-                    <th>Classe</th>
-                    <th>Descrição</th>
-                    <th>Equivalência</th>
-                </tr>
-                <tr>
-                    <td>.</td>
-                    <td>combina com qualquer caractere</td>
-                </tr>
-                <tr>
-                    <td>\s</td>
-                    <td>combina com qualquer espaço em branco</td>
-                    <td>[ \t] ou [ \t\r\n] dependendo das opções</td>
-                </tr>
-                <tr>
-                    <td>\w</td>
-                    <td>qualquer caractere de palavra, incluindo dígitos</td>
-                    <td>[A-Za-z0-9]</td>
-                </tr>
-                <tr>
-                    <td>\d</td>
-                    <td>qualquer dígito decimal</td>
-                    <td>[0-9]</td>
-                </tr>
-            </table>
-            <p>Exemplo:</p>
-            <table>
-                <tr>
-                    <th>Regex</th>
-                    <th>String</th>
-                    <th>Match</th>
-                </tr>
-                <tr>
-                    <td>public\s+\w+\s+\w+</td>
-                    <td>public String Contar(TO to)</td>
-                    <td>
-                        <span class='destaque'>public String Contar</span>(TO to)</td>
-                </tr>
-            </table>
-        </div>
-        <div class='container hidden' data-titulo='Captura alternativa'>
-            <p>Usa-se o | para definir cadeias alternativas de captura.</p>
-            <table>
-                <tr>
-                    <th>Regex</th>
-                    <th>String</th>
-                    <th>Match</th>
-                </tr>
-                <tr>
-                    <td>três|trigo|tristes</td>
-                    <td>Três pratos de trigo para três tigres tristes</td>
-                    <td>Três pratos de
-                        <span class="destaque">trigo</span> para
-                        <span class="destaque">três</span> tigres
-                        <span class="destaque">tristes</span>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class='container hidden' data-titulo='Âncoras'>
-            <p>As âncoras não fazem parte da captura, mas a validam de acordo com a posição.</p>
-            <p>As mais usadas são ^ para início de linha ou string e $ para o final.</p>
-        </div>
-        <div class='container hidden' data-titulo='Grupos'>
-            <p>Os grupos são sbuexpressões colocadas entre parênteses.</p>
-            <p>Pode-se acessar um grupo já capturado usando \n, onde
-                <span class="italico">n</span> é o número da captura em ordem.</p>
-            <table>
-                <tr>
-                    <th>Regex</th>
-                    <th>String</th>
-                    <th>Match</th>
-                </tr>
-                <tr>
-                    <td>([a-c]{2});+?\1</td>
-                    <td>cabeça de cavalo</td>
-                    <td>
-                        <span class='destaque'>cabeça de ca</span>valo</td>
-                </tr>
-            </table>
-        </div>
-        <div class='container hidden' data-titulo='Grupos nomeados'>
-            <p>É mais fácil acessar os grupos dando-lhes nomes. Além disso, a expressão regular fica um pouco menos ilegível</p>
-            <p>A sintaxe do grupo nomeado é (?&lt;NOME&gt;expressão), e dentro da regex ele é acessado com \k&lt;NOME&gt;</p>
-        </div>
-        <div class='container hidden' data-titulo='Grupos sem captura'>
-            <p>Para não capturar um grupo se usa (?:expressao).</p>
-            <p>Um dos usos desse grupo é quando se quer delimitar uma expressão sem incluir na lista de grupos dos resultados.</p>
-            <p>Ex: (?&lt;BOLO&gt;bol(?:inh|ã)?o)</p>
-	    <p>
-	      um <span class='destaque'>bolo</span>, um <span class='destaque'>bolinho</span>, um <span class='destaque'>bolão</span>
-	    </p>
-        </div>
-        <div class='container hidden' data-titulo='Grupos de vizinhos'>
-            <p>Esses grupos observam à frente ou a trás da expressão. Funcionam como âncoras definidas por expressões.
-            </p>
-            <table>
-                <tr>
-                    <td>(?=
-                        <span class='italico'>expressão</span>)</td>
-                    <td>combina com expressão à frente</td>
-                </tr>
-                <tr>
-                    <td>(?
-                        <=<span class='italico'>expressão</span>)</td>
-                    <td>combina com expressão atrás</td>
-                </tr>
-                <tr>
-                    <td>(?!
-                        <span class='italico'>expressão</span>)</td>
-                    <td>combina se não há expressão à frente</td>
-                </tr>
-                <tr>
-                    <td>(?
-                        <!>
-                        <span class='italico'>expressão</span>)</td>
-                    <td>combina se não há expressão atrás</td>
-                </tr>
-            </table>
-            <table>
-                <tr>
-                    <th>Regex</th>
-                    <th>String</th>
-                    <th>Match</th>
-                </tr>
-                <tr>
-                    <td>guarda(?=-sol)</td>
-                    <td>guarda-sol e guarda-chuva</td>
-                    <td>
-                        <span class='destaque'>guarda</span>-sol e guarda-chuva</td>
-                </tr>
-                <tr>
-                    <td>(?&lt;guarda-)sol</td>
-                    <td>guarda-sol pôr-do-sol</td>
-                    <td>guarda-
-                        <span class='destaque'>sol</span> pôr-do-sol</td>
-                </tr>
-            </table>
-        </div>
-        <div class='container hidden' data-titulo='Grupos balanceados (.NET)'>
-	  <p>Os grupos balanceados permitem fazer capturas de conteúdos em caracteres aninhados. Se muda o conteúdo de grupo capturado com (?&lt;NOVO-VELHO&gt;<span class='italico'>expressão</span>)</p>
-	  <p>Exemplo no Regex Editor</p>
-	  <pre>(?x: ((?&lt;P&gt;[(]) # Abre grupo
-	    | (?&lt;C&gt;-&lt;P&gt;[)]) # Fecha grupo P e captura conteudo em C
-	    | (?(P) # Se existe grupo P
-	    [^()] # Captura o que não é parênteses
-	    | (?!) # Se não existe P não captura nada
-	    )
-	    )+
-	    (?(P)(?!)) # Se não fechou algum grupo, não captura nada
-	  </code>
+      <div class='container hidden' data-titulo=''>
+        <h1>Expressões Regulares</h1>
+      </div>
+      <div class='container hidden' data-titulo='Apresentação'>
+        <ul>
+          <li>Pedro Scheffer</li>
+          <li>Engenheiro Civil</li>
+          <li>Aprendi o básico com Pascal e comecei a sério com VBA</li>
+          <li>2 anos programando em Fortran antes do banco</li>
+          <li>5 anos e 10 dias de Banrisul</li>
+          <li>Conheci expressões regulares no Mehlroes Práticas</li>
+          <li>Não sei usar PowerPoint (nem Impress)</li>
+        </ul>
+      </div>
+      <div class='container hidden' data-titulo='O que são Expressões Regulares?'>
+        <p>Expressões regulares são sequências de caracteres que definem padrões de busca.</p>
+	<p>Os caracteres são buscados um por vez, quando um é encontrado, passa pro próximo. Se falhar alguma captura o motor retorna.</p>
+	<p>Se busca a maior combinação possível.</p>
+	<table>
+	  <tr>
+	    <td>REGEX</td><td>ma\w{3}</td><td>a+a+
+	  </tr>
+	  <tr>
+	    <td>STRING</td><td>maçã manga</td><td>aaaaa</td>
+	  </tr>
+	</table>
+      </div>
+      <div class='container hidden' data-titulo='⚠ Importante! ⚠'>
+        <q>Some people, when confronted with a problem, think “I know, I'll use regular expressions.” Now they have two
+          problems.
+        </q>
+        <div class='direita'>
+          <span class='autor'>Jamie Zawinski</span>
 	</div>
-        <div class='container hidden' data-titulo='Opções'>
-            <p>Existem algumas opções que modificam o comportamento das expressões</p>
-            <p>Elas podem ser definidas em uma subexpressão (?opções:expressão) ou para toda a expressão</p>
-            <table>
-                <tr>
-                    <td>i:</td>
-                    <td>independência de capitalização (azeite faz match com AzEiTe)</td>
-                </tr>
-                <tr>
-                    <td>m:</td>
-                    <td>multilinha, âncoras ^ e $ combinam com início e fim de linha, e não da string inteira</td>
-                </tr>
-                <tr>
-                    <td>s:</td>
-                    <td>linha única, . combina com todos os caracteres. sem isso ele não combina com \n</td>
-                </tr>
-                <tr>
-                    <td>n:</td>
-                    <td>captura explícita, somente grupos nomeados entram na captura</td>
-                </tr>
-                <tr>
-                    <td>x:</td>
-                    <td>ignora espaço em branco e permite comentários. pra combinar com espaços tem que usar \s</td>
-                </tr>
-            </table>
-            <p>Obs: os modos multilinha e linha única podem ser usados ao mesmo tempo 🤔</p>
-        </div>
-        <div class='container hidden' data-titulo="Uso em JavaScript">
-            <p>Em JavaScript existe o literal pra expressões regulares:</p>
-            <p>/expressão/opcções</p>
-        </div>
-        <div class="container hidden" data-titulo="Uso em C#">
-	  <p>Em C# pode-se criar um objeto Pattern inicializendo com a expressão em uma string ou se usa a expressão diretamente em alguns métodos estáticos.</p>
-	</div>
-        <div class="container hidden" data-titulo="Recomendações">
-            <ul>
-                <li>Referência .NET:
-                    <a href="https://docs.microsoft.com/en-us/dotnet/standard/base-types/regular-expression-language-quick-reference">https://docs.microsoft.com/en-us/dotnet/standard/base-types/regular-expression-language-quick-reference</a>
-                </li>
-                <li>Intrepretador Regex 101:
-                    <a href='https://regex101.com/'>https://regex101.com/</a>
-                </li>
-                <li>
-                    Regex Editor no Developer Tools
-                </li>
-		<li> Palavras cruzadas <a href="https://regexcrossword.com/">https://regexcrossword.com/</a></li>
-            </ul>
-        </div>
-    </div>
-    <script>
-        document.getElementsByTagName('body')[0].addEventListener('keydown', tratarTecla);
-        var slides = document.getElementsByClassName('container');
-        var indiceAtual = 0;
-        var titulo = document.getElementById('titulo');
-        var totalSlides = slides.length;
-        var meter = document.getElementById('meter-front');
+      </div>
+      <div class='container hidden' data-titulo='⚠ Importante! ⚠'>
+	<p>As expressões regulares podem ser úteis para encontrar padrões, mas não são o melhor meio de analisar código.</p>
+	  <p>Há relatos de programadores <a href='https://stackoverflow.com/questions/1732348/regex-match-open-tags-except-xhtml-self-contained-tags/'>abrindo os portões do inferno</a> ao tentar isso.</p>
+      </div>
+      <div class='container hidden' data-titulo='Caracteres normais'>
+	<p>São todos os caracteres que não são especiais :)</p>
+	<p>Exemplos: A b 3 @ !</p>
+	<p>Eles combinam com caracteres iguais. Se combinados, com a sequência.</p>
+	<table>
+	  <tr>
+	    <th>Regex</th>
+	    <th>String</th>
+	    <th>Combinações</th>
+	  </tr>
+	  <tr>
+	    <td>aba</td>
+	    <td>abacate</td>
+	    <td>
+              <span class='destaque'>aba</span>cate</td>
+	  </tr>
+	  <tr>
+	    <td>010</td>
+	    <td>01010</td>
+	    <td>
+              <span class='destaque'>010</span>10
+	    </td>
+	  </tr>
+	  <tr>
+	    <td>010</td>
+	    <td>0101010</td>
+	    <td>
+              <span class='destaque'>010</span>1
+              <span class='destaque'>0</span>
+	    </td>
+	  </tr>
+	</table>
+      </div>
+      <div class='container hidden' data-titulo='Quantificadores'>
+	<p>Indicam um multiplicador para o caractere ou grupo de caracteres anterior.</p>
+	<table>
+	  <tr>
+	    <th>Quantificador</th>
+	    <th>Descrição</th>
+	    <th>Equivale a</th>
+	  </tr>
+	  <tr>
+	    <td>*</td>
+	    <td>zero ou mais repetições</td>
+	    <td>{0,}</td>
+	  </tr>
+	  <tr>
+	    <td>+</td>
+	    <td>uma ou mais repetições</td>
+	    <td>{1,}</td>
+	  </tr>
+	  <tr>
+	    <td>?</td>
+	    <td>zero ou uma repetição</td>
+	    <td>{0,1}</td>
+	  </tr>
+	  <tr>
+	    <td>{n}</td>
+	    <td>exatamente
+              <span class='italico'>n</span> repetições</td>
+	  </tr>
+	  <tr>
+	    <td>{n, m}</td>
+	    <td>no mínimo
+              <span class='italico'>n</span> repetições e no máximo
+              <span class='italico'>m</span> repetições</td>
+	  </tr>
+	</table>
+	<p>Os quantificadores são gulosos (
+	  <span class='italico'>greedy</span> ou cobiçosos em inglês, ou seja, buscam a maior combinação possível.</p>
+	<p>Para buscar a menor combinação possível, pode-se colocar
+	  <span class='destaque'>?</span> após o quantificador.</p>
+      </div>
+      <div class='container hidden' data-titulo='Lista de caracteres'>
+	<p>Para tentar combinar com um caracter de uma lista de caracteres, usamos colchetes.</p>
+	<p>Um hífen pode ser usado para representar um intervalo de caracteres.</p>
+	<p>Para combinar com os caracteres NÃO presentes no grupo, se inicia com um acento circunflexo.</p>
+	<table>
+	  <tr>
+	    <th>Regex</th>
+	    <th>String</th>
+	    <th>Combinações</th>
+	  </tr>
+	  <tr>
+	    <td>[Ab!]</td>
+	    <td>Abacate!</td>
+	    <td>
+              <span class='destaque'>A</span>
+              <span class='destaque'>b</span>acate
+              <span class='destaque'>!</span>
+	    </td>
+	  </tr>
+	  <tr>
+	    <td>[a-e]+</td>
+	    <td>Abacate!</td>
+	    <td>A
+              <span class='destaque'>baca</span>t
+              <span class='destaque'>e</span>!</td>
+	  </tr>
+	  <tr>
+	    <td>[^a-e]+</td>
+	    <td>Abacate!</td>
+	    <td>
+              <span class='destaque'>A</span>baca
+              <span class='destaque'>t</span>e
+              <span class='destaque'>!</span>
+	    </td>
+	  </tr>
+	</table>
+      </div>
+      <div class='container hidden' data-titulo='Classes de caracteres'>
+	<p>As classes de caracteres incluem alguns atalhos para os grupos já mencionados.</p>
+	<p>A negação das classes é usando a letra maiúscula.</p>
+	<table>
+	  <tr>
+	    <th>Classe</th>
+	    <th>Descrição</th>
+	    <th>Equivalência</th>
+	  </tr>
+	  <tr>
+	    <td>.</td>
+	    <td>combina com qualquer caractere</td>
+	  </tr>
+	  <tr>
+	    <td>\s</td>
+	    <td>combina com qualquer espaço em branco</td>
+	    <td>[ \t] ou [ \t\r\n] dependendo das opções</td>
+	  </tr>
+	  <tr>
+	    <td>\w</td>
+	    <td>qualquer caractere de palavra, incluindo dígitos</td>
+	    <td>[A-Za-z0-9]</td>
+	  </tr>
+	  <tr>
+	    <td>\d</td>
+	    <td>qualquer dígito decimal</td>
+	    <td>[0-9]</td>
+	  </tr>
+	</table>
+	<p>Exemplo:</p>
+	<table>
+	  <tr>
+	    <th>Regex</th>
+	    <th>String</th>
+	    <th>Match</th>
+	  </tr>
+	  <tr>
+	    <td>public\s+\w+\s+\w+</td>
+	    <td>public String Contar(TO to)</td>
+	    <td>
+              <span class='destaque'>public String Contar</span>(TO to)</td>
+	  </tr>
+	</table>
+      </div>
+      <div class='container hidden' data-titulo='Captura alternativa'>
+	<p>Usa-se o | para definir cadeias alternativas de captura.</p>
+	<table>
+	  <tr>
+	    <th>Regex</th>
+	    <th>String</th>
+	    <th>Match</th>
+	  </tr>
+	  <tr>
+	    <td>três|trigo|tristes</td>
+	    <td>Três pratos de trigo para três tigres tristes</td>
+	    <td>Três pratos de
+              <span class="destaque">trigo</span> para
+              <span class="destaque">três</span> tigres
+              <span class="destaque">tristes</span>
+	    </td>
+	  </tr>
+	</table>
+      </div>
+      <div class='container hidden' data-titulo='Âncoras'>
+	<p>As âncoras não fazem parte da captura, mas a validam de acordo com a posição.</p>
+	<p>As mais usadas são ^ para início de linha ou string e $ para o final.</p>
+      </div>
+      <div class='container hidden' data-titulo='Grupos'>
+	<p>Os grupos são sbuexpressões colocadas entre parênteses.</p>
+	<p>Pode-se acessar um grupo já capturado usando \n, onde
+	  <span class="italico">n</span> é o número da captura em ordem.</p>
+	<table>
+	  <tr>
+	    <th>Regex</th>
+	    <th>String</th>
+	    <th>Match</th>
+	  </tr>
+	  <tr>
+	    <td>([a-c]{2});+?\1</td>
+	    <td>cabeça de cavalo</td>
+	    <td>
+              <span class='destaque'>cabeça de ca</span>valo</td>
+	  </tr>
+	</table>
+      </div>
+      <div class='container hidden' data-titulo='Grupos nomeados'>
+	<p>É mais fácil acessar os grupos dando-lhes nomes. Além disso, a expressão regular fica um pouco menos ilegível</p>
+	<p>A sintaxe do grupo nomeado é (?&lt;NOME&gt;expressão), e dentro da regex ele é acessado com \k&lt;NOME&gt;</p>
+      </div>
+      <div class='container hidden' data-titulo='Grupos sem captura'>
+	<p>Para não capturar um grupo se usa (?:expressao).</p>
+	<p>Um dos usos desse grupo é quando se quer delimitar uma expressão sem incluir na lista de grupos dos resultados.</p>
+	<p>Ex: (?&lt;BOLO&gt;bol(?:inh|ã)?o)</p>
+	<p>
+	  um <span class='destaque'>bolo</span>, um <span class='destaque'>bolinho</span>, um <span class='destaque'>bolão</span>
+	</p>
+      </div>
+      <div class='container hidden' data-titulo='Grupos de vizinhos'>
+	<p>Esses grupos observam à frente ou a trás da expressão. Funcionam como âncoras definidas por expressões.
+	</p>
+	<table>
+	  <tr>
+	    <td>(?=
+              <span class='italico'>expressão</span>)</td>
+	    <td>combina com expressão à frente</td>
+	  </tr>
+	  <tr>
+	    <td>(?
+              <=<span class='italico'>expressão</span>)</td>
+                      <td>combina com expressão atrás</td>
+	  </tr>
+	  <tr>
+	    <td>(?!
+              <span class='italico'>expressão</span>)</td>
+	    <td>combina se não há expressão à frente</td>
+	  </tr>
+	  <tr>
+	    <td>(?
+              <!>
+              <span class='italico'>expressão</span>)</td>
+	    <td>combina se não há expressão atrás</td>
+	  </tr>
+	</table>
+	<table>
+	  <tr>
+	    <th>Regex</th>
+	    <th>String</th>
+	    <th>Match</th>
+	  </tr>
+	  <tr>
+	    <td>guarda(?=-sol)</td>
+	    <td>guarda-sol e guarda-chuva</td>
+	    <td>
+              <span class='destaque'>guarda</span>-sol e guarda-chuva</td>
+	  </tr>
+	  <tr>
+	    <td>(?&lt;guarda-)sol</td>
+	    <td>guarda-sol pôr-do-sol</td>
+	    <td>guarda-
+              <span class='destaque'>sol</span> pôr-do-sol</td>
+	  </tr>
+	</table>
+      </div>
+      <div class='container hidden' data-titulo='Grupos balanceados (.NET)'>
+	<p>Os grupos balanceados permitem fazer capturas de conteúdos em caracteres aninhados. Se muda o conteúdo de grupo capturado com (?&lt;NOVO-VELHO&gt;<span class='italico'>expressão</span>)</p>
+	<p>Exemplo no Regex Editor</p>
+	<pre>(?x: ((?&lt;P&gt;[(]) # Abre grupo
+	  | (?&lt;C&gt;-&lt;P&gt;[)]) # Fecha grupo P e captura conteudo em C
+	  | (?(P) # Se existe grupo P
+	  [^()] # Captura o que não é parênteses
+	  | (?!) # Se não existe P não captura nada
+	  )
+	  )+
+	  (?(P)(?!)) # Se não fechou algum grupo, não captura nada
+</code>
+</div>
+<div class='container hidden' data-titulo='Opções'>
+  <p>Existem algumas opções que modificam o comportamento das expressões</p>
+  <p>Elas podem ser definidas em uma subexpressão (?opções:expressão) ou para toda a expressão</p>
+  <table>
+    <tr>
+      <td>i:</td>
+      <td>independência de capitalização (azeite faz match com AzEiTe)</td>
+    </tr>
+    <tr>
+      <td>m:</td>
+      <td>multilinha, âncoras ^ e $ combinam com início e fim de linha, e não da string inteira</td>
+    </tr>
+    <tr>
+      <td>s:</td>
+      <td>linha única, . combina com todos os caracteres. sem isso ele não combina com \n</td>
+    </tr>
+    <tr>
+      <td>n:</td>
+      <td>captura explícita, somente grupos nomeados entram na captura</td>
+    </tr>
+    <tr>
+      <td>x:</td>
+      <td>ignora espaço em branco e permite comentários. pra combinar com espaços tem que usar \s</td>
+    </tr>
+    <tr>
+      <td>g:</td>
+      <td>global, continua capturando depois da primeira combinação</td>
+    </tr>
+  </table>
+  <p>Obs: os modos multilinha e linha única podem ser usados ao mesmo tempo 🤔</p>
+</div>
+<div class='container hidden' data-titulo="Uso em JavaScript">
+  <p>Em JavaScript existe o literal pra expressões regulares:</p>
+  <p>/expressão/opções</p>
+  <p>ou também se tem o método de match nas strings</p>
+  <table>
+    <tr>
+      <td>regexp.exec(string)</td>
+      <td>retorna a primeira combinação encontrada. com a opção global a regexp grava o índice e começa a próxima busca nesse índice</td>
+    </tr>
+    <tr>
+      <td>regexp.test(string)</td>
+      <td>testa se a string inteira é combinação para a expressão regular</td>
+    </tr>
+    <tr>
+      <td>string.test(regexp)</td>
+      <td>retorna array com as combinações</td>
+    </tr>
+  </table>
+</div>
+<div class="container hidden" data-titulo="Uso em C#">
+  <p>Em C# o padrão é uma String. Pode-se criar um objeto de Regex usando o padrão ou usar os métodos estáticos da classe Regex.</p>
+  <table>
+    <tr>
+      <td>Regex.IsMatch</td>
+      <td>retorna true se string combinar inteira com a expressão</td>
+    </tr>
+    <tr>
+      <td>Regex.Match</td>
+      <td>procura a primeira combinação da regex na string</td>
+    </tr>
+    <tr>
+      <td>Regex.Matches</td>
+      <td>retorna uma MatchCollection com todas as combinações encontradas</td>
+    </tr>
+  </table>
+</div>
+<div class="container hidden" data-titulo="Recomendações">
+  <ul>
+    <li>Referência .NET:
+      <a href="https://docs.microsoft.com/en-us/dotnet/standard/base-types/regular-expression-language-quick-reference">https://docs.microsoft.com/en-us/dotnet/standard/base-types/regular-expression-language-quick-reference</a>
+    </li>
+    <li>Intrepretador Regex 101:
+      <a href='https://regex101.com/'>https://regex101.com/</a>
+    </li>
+    <li>
+      Regex Editor no Developer Tools
+    </li>
+    <li>Palavras cruzadas <a href="https://regexcrossword.com/">https://regexcrossword.com/</a></li>
+    <li>Por que não analisar XML com expressões regulares? <a href='https://stackoverflow.com/questions/1732348/regex-match-open-tags-except-xhtml-self-contained-tags/'>https://stackoverflow.com/questions/1732348/regex-match-open-tags-except-xhtml-self-contained-tags/</a></li>
+  </ul>
+</div>
+</div>
+<script>
+  document.getElementsByTagName('body')[0].addEventListener('keydown', tratarTecla);
+  var slides = document.getElementsByClassName('container');
+  var indiceAtual = 0;
+  var titulo = document.getElementById('titulo');
+  var totalSlides = slides.length;
+  var meter = document.getElementById('meter-front');
 
-        slides[indiceAtual].classList.remove('hidden');
+  slides[indiceAtual].classList.remove('hidden');
 
-        console.log('totalSlides: ' + totalSlides);
+  console.log('totalSlides: ' + totalSlides);
 
-        function trocarSlide(troca) {
-            if (trocaValida(troca)) {
-                slides[indiceAtual].classList.add('hidden');
-                indiceAtual = troca === 'avanca' ? indiceAtual + 1 : indiceAtual - 1;
-                let slideAtual = slides[indiceAtual];
-                slideAtual.classList.remove('hidden');
-                titulo.textContent = slideAtual.dataset.titulo;
-                meter.style.width = ((indiceAtual + 1) * 100 / totalSlides) + '%';
-            }
-        }
+  function trocarSlide(troca) {
+  if (trocaValida(troca)) {
+  slides[indiceAtual].classList.add('hidden');
+  indiceAtual = troca === 'avanca' ? indiceAtual + 1 : indiceAtual - 1;
+  let slideAtual = slides[indiceAtual];
+  slideAtual.classList.remove('hidden');
+  titulo.textContent = slideAtual.dataset.titulo;
+  meter.style.width = ((indiceAtual + 1) * 100 / totalSlides) + '%';
+  }
+  }
 
-        function trocaValida(troca) {
-            if (troca === 'avanca') {
-                return indiceAtual < totalSlides - 1;
-            }
-            if (troca === 'recua') {
-                return indiceAtual > 0;
-            }
-            return false;
-        }
+  function trocaValida(troca) {
+  if (troca === 'avanca') {
+  return indiceAtual < totalSlides - 1;
+		       }
+		       if (troca === 'recua') {
+                       return indiceAtual > 0;
+    }
+    return false;
+    }
 
-        function tratarTecla(event) {
-            switch (event.key) {
-                case 'ArrowRight': trocarSlide('avanca'); break;
-                case 'ArrowLeft': trocarSlide('recua'); break;
-                default: break;
-            }
-        }
-    </script>
+    function tratarTecla(event) {
+    switch (event.key) {
+    case 'ArrowRight': trocarSlide('avanca'); break;
+    case 'ArrowLeft': trocarSlide('recua'); break;
+    default: break;
+    }
+    }
+</script>
 </body>
 
 </html>
