@@ -75,6 +75,7 @@
         .italico {
             font-style: italic;
         }
+
         li {
             line-height: 6vh;
         }
@@ -317,32 +318,88 @@
             <p>A sintaxe do grupo nomeado é (?&lt;NOME&gt;expressão), e dentro da regex ele é acessado com \k&lt;NOME&gt;</p>
         </div>
         <div class='container hidden' data-titulo='Grupos sem captura'>
-            <p>Para não capturar um grupo se usa (?!expressao).</p>
+            <p>Para não capturar um grupo se usa (?:expressao).</p>
+            <p>Um dos usos desse grupo é quando se quer delimitar uma expressão sem incluir na lista de grupos dos resultados.</p>
+            <p>Ex: (?&lt;BOLO&gt;bol(?:inh|ã)?o)</p>
         </div>
         <div class='container hidden' data-titulo='Grupos de vizinhos'>
             <p>Esses grupos observam à frente ou a trás da expressão. Funcionam como âncoras definidas por expressões.
             </p>
             <table>
                 <tr>
-                    <td></td>
-                    <td></td>
+                    <td>(?=
+                        <span class='italico'>expressão</span>)</td>
+                    <td>combina com expressão à frente</td>
                 </tr>
                 <tr>
-                    <td></td>
-                    <td></td>
+                    <td>(?
+                        <=<span class='italico'>expressão</span>)</td>
+                    <td>combina com expressão atrás</td>
                 </tr>
                 <tr>
-                    <td></td>
-                    <td></td>
+                    <td>(?!
+                        <span class='italico'>expressão</span>)</td>
+                    <td>combina se não há expressão à frente</td>
                 </tr>
                 <tr>
-                    <td></td>
-                    <td></td>
+                    <td>(?
+                        <!>
+                        <span class='italico'>expressão</span>)</td>
+                    <td>combina se não há expressão atrás</td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <th>Regex</th>
+                    <th>String</th>
+                    <th>Match</th>
+                </tr>
+                <tr>
+                    <td>guarda(?=-sol)</td>
+                    <td>guarda-sol e guarda-chuva</td>
+                    <td>
+                        <span class='destaque'>guarda</span>-sol e guarda-chuva</td>
+                </tr>
+                <tr>
+                    <td>(?&lt;guarda-)sol</td>
+                    <td>guarda-sol pôr-do-sol</td>
+                    <td>guarda-
+                        <span class='destaque'>sol</span> pôr-do-sol</td>
                 </tr>
             </table>
         </div>
         <div class='container hidden' data-titulo='Grupos de balanço (.NET)'></div>
-        <div class='container hidden' data-titulo="Uso em JavaScript"></div>
+        <div class='container hidden' data-titulo='Opções'>
+            <p>Existem algumas opções que modificam o comportamento das expressões</p>
+            <p>Elas podem ser definidas em uma subexpressão (?opções:expressão) ou para toda a expressão</p>
+            <table>
+                <tr>
+                    <td>i:</td>
+                    <td>independência de capitalização (azeite faz match com AzEiTe)</td>
+                </tr>
+                <tr>
+                    <td>m:</td>
+                    <td>multilinha, âncoras ^ e $ combinam com início e fim de linha, e não da string inteira</td>
+                </tr>
+                <tr>
+                    <td>s:</td>
+                    <td>linha única, . combina com todos os caracteres. sem isso ele não combina com \n</td>
+                </tr>
+                <tr>
+                    <td>n:</td>
+                    <td>captura explícita, somente grupos nomeados entram na captura</td>
+                </tr>
+                <tr>
+                    <td>x:</td>
+                    <td>ignora espaço em branco e permite comentários. pra combinar com espaços tem que usar \s</td>
+                </tr>
+            </table>
+            <p>Obs: os modos multilinha e linha única podem ser usados ao mesmo tempo 🤔</p>
+        </div>
+        <div class='container hidden' data-titulo="Uso em JavaScript">
+            <p>Em JavaScript existe o literal pra expressões regulares:</p>
+            <p>/expressão/opcções</p>
+        </div>
         <div class="container hidden" data-titulo="Uso em C#"></div>
         <div class="container hidden" data-titulo="Uso em Java"></div>
         <div class="container hidden" data-titulo="Recomendações">
